@@ -105,123 +105,216 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+-- Create a new table named item with the following specifications and constraints:
+item_id as TEXT and as primary key.
+item_desc as TEXT.
+rate as INTEGER.
+icom_id as TEXT with a length of 4.
+icom_id is a foreign key referencing com_id in the company table.
+The foreign key should cascade updates and deletes.
+item_desc and rate should not accept NULL.
 
 ```sql
--- Paste your SQL code below for Question 1
+create table item
+(
+    item_id text primary key,
+    item_desc text not null,
+    rate integer not null,
+    icom_id text check(length(icom_id)=4),
+    foreign key (icom_id) references company(com_id)
+        on update cascade
+        on delete cascade
+);
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="962" height="268" alt="image" src="https://github.com/user-attachments/assets/09a926bb-efbd-47fb-99d6-5d85567ea751" />
+
 
 **Question 2**
 ---
--- Paste Question 2 here
-
+-- Write an SQL Query to add the attributes designation, net_salary, and dob to the Companies table with the following data types:
+designation as VARCHAR(50)
+net_salary as NUMBER
+dob as DATE
 ```sql
--- Paste your SQL code below for Question 2
+alter table Companies add column designation varchar(50);
+alter table Companies add column net_salary number;
+alter table Companies add column dob date;
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="1226" height="395" alt="image" src="https://github.com/user-attachments/assets/29fa51f6-27a7-4acb-a82f-e6c9ad2e3368" />
+
 
 **Question 3**
 ---
--- Paste Question 3 here
+-- Insert the below data into the Customers table, allowing the City and ZipCode columns to take their default values.
+
+CustomerID  Name          Address
+----------  ------------  ----------
+304         Peter Parker  Spider St      
+
 
 ```sql
--- Paste your SQL code below for Question 3
+-- insert into Customers(CustomerID,Name,Address) values(304,"Peter Parker","Spider St");
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1162" height="285" alt="image" src="https://github.com/user-attachments/assets/306efa98-8452-4ce7-950e-3c6d881e0245" />
+
 
 **Question 4**
 ---
--- Paste Question 4 here
+-- Create a new table named item with the following specifications and constraints:
+item_id as TEXT and as primary key.
+item_desc as TEXT.
+rate as INTEGER.
+icom_id as TEXT with a length of 4.
+icom_id is a foreign key referencing com_id in the company table.
+The foreign key should set NULL on updates and deletes.
+item_desc and rate should not accept NULL.
 
 ```sql
--- Paste your SQL code below for Question 4
+-- create table item(
+    item_id text primary key,
+    item_desc text not null,
+    rate integer not null,
+    icom_id text check(length(icom_id)=4),
+    foreign key (icom_id) references company(com_id)
+        on update set null
+        on delete set null
+);
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1228" height="347" alt="image" src="https://github.com/user-attachments/assets/eb63cbdf-67ed-41ae-9e01-4a695c44e28e" />
+
 
 **Question 5**
 ---
--- Paste Question 5 here
+-- Write a SQL query to add a column named Date_of_birth as Date in the Student_details table.
 
 ```sql
--- Paste your SQL code below for Question 5
+-- alter table Student_details add column Date_of_birth Date;
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="1262" height="330" alt="image" src="https://github.com/user-attachments/assets/b93d0686-c1b7-4f30-ad32-d34bd94ab929" />
+
 
 **Question 6**
 ---
--- Paste Question 6 here
+-- Create a table named Invoices with the following constraints:
+
+InvoiceID as INTEGER should be the primary key.
+InvoiceDate as DATE.
+DueDate as DATE should be greater than the InvoiceDate.
+Amount as REAL should be greater than 0
 
 ```sql
--- Paste your SQL code below for Question 6
+-- create table Invoices(
+   InvoiceID integer primary key,
+   InvoiceDate Date,
+   DueDate Date check(DueDate>InvoiceDate),
+   Amount Real check(Amount>0));
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="1191" height="282" alt="image" src="https://github.com/user-attachments/assets/cfbf510d-eb28-490f-9247-4dac4fd69bd0" />
+
 
 **Question 7**
 ---
--- Paste Question 7 here
+--In the Student_details table, insert a student record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
+
+RollNo      Name            Gender      Subject      MARKS
+----------  ------------    ----------  ----------   ----------
+205         Olivia Green    F
+207         Liam Smith      M           Mathematics  85
+208         Sophia Johnson  F           Science
 
 ```sql
--- Paste your SQL code below for Question 7
+-- insert into Student_details values(205,"Olivia Green","F",null,null);
+insert into Student_details(RollNo,Name,Gender,Subject,MARKS) values(207,"Liam Smith","M","Mathematics",85);
+insert into Student_details(RollNo,Name,Gender,Subject,MARKS) values(208,"Sophia Johnson","F","Science",null);
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="1218" height="270" alt="image" src="https://github.com/user-attachments/assets/590b91e9-afc4-47cd-b255-180eb4432eb0" />
+
 
 **Question 8**
 ---
--- Paste Question 8 here
+-- Create a table named Employees with the following columns:
 
+EmployeeID as INTEGER
+FirstName as TEXT
+LastName as TEXT
+HireDate as DATE
 ```sql
--- Paste your SQL code below for Question 8
+--create table Employees(
+    EmployeeID INTEGER,
+    FirstName TEXT,
+    LastName TEXT,
+    HireDate DATE);
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="1222" height="308" alt="image" src="https://github.com/user-attachments/assets/3899817e-e085-4bd7-ab23-fd705d21daf7" />
 
 **Question 9**
 ---
--- Paste Question 9 here
+-- Create a new table named contacts with the following specifications:
+contact_id as INTEGER and primary key.
+first_name as TEXT and not NULL.
+last_name as TEXT and not NULL.
+email as TEXT.
+phone as TEXT and not NULL with a check constraint to ensure the length of phone is at least 10 characters.
 
 ```sql
--- Paste your SQL code below for Question 9
+-- create table contacts(
+    contact_id integer primary key,
+    first_name text not null,
+    last_name text not null,
+    email text,
+    phone text not null check(length(phone)>=10));
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="1235" height="318" alt="image" src="https://github.com/user-attachments/assets/5372540a-f96f-482a-aec3-4073d5f94dd8" />
+
 
 **Question 10**
 ---
--- Paste Question 10 here
+-- Insert all students from Archived_students table into the Student_details table.
+
+cid         name        type        notnull     dflt_value  pk
+----------  ----------  ----------  ----------  ----------  ----------
+0           RollNo      INT           0                       1
+1           Name        VARCHAR(100)  0                       0
+2           Gender      VARCHAR(10)   0                       0
+3           Subject     VARCHAR(50)   0                       0
+4           MARKS       INT           0                       0
 
 ```sql
--- Paste your SQL code below for Question 10
+insert into Student_details
+select * from Archived_students;
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="1227" height="267" alt="image" src="https://github.com/user-attachments/assets/f7510e53-82ec-4a20-9e24-967e5f1b9a0d" />
+
 
 
 ## RESULT
